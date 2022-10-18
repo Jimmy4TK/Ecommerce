@@ -1,10 +1,10 @@
-package com.ecommerce.JumpStart;
+package com.example.jumpstart.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JumpStartApplicationTests {
+class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
