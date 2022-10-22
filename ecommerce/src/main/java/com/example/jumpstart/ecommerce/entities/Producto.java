@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name="producto")
@@ -41,7 +40,7 @@ public class Producto extends Base{
     @Column(name="Recomendado")
     private Boolean recomendado;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_categoria")
     private Categoria categoria;
 }

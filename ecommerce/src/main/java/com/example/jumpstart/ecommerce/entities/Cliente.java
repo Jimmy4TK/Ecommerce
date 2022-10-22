@@ -37,7 +37,7 @@ public class Cliente extends Base{
     private String mail;
 
     @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
-    private List<Tarjeta> tarjeta= new ArrayList<Tarjeta>();
+    private List<Tarjeta> tarjetas= new ArrayList<Tarjeta>();
 
     @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
     private List<Domicilio> domicilios= new ArrayList<Domicilio>();

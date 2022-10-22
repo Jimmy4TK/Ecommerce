@@ -31,11 +31,11 @@ public class Pedido extends Base{
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PedidoProducto> pedidoProductos = new ArrayList<PedidoProducto>();
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_domicilio")
     private Domicilio domicilio;
 

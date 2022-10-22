@@ -1,13 +1,14 @@
 package com.example.jumpstart.ecommerce.services;
 
-import com.example.jumpstart.ecommerce.entities.Categoria;
 import com.example.jumpstart.ecommerce.entities.Cliente;
 import com.example.jumpstart.ecommerce.repositories.BaseRepository;
 import com.example.jumpstart.ecommerce.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;

@@ -1,6 +1,5 @@
 package com.example.jumpstart.ecommerce.repositories;
 
-import com.example.jumpstart.ecommerce.entities.Categoria;
 import com.example.jumpstart.ecommerce.entities.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

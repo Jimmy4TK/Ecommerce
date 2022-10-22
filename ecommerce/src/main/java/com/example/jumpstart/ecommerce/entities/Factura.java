@@ -30,7 +30,7 @@ public class Factura extends Base {
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_tarjeta")
     private Tarjeta tarjeta;
 }

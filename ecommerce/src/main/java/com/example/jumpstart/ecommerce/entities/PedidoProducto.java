@@ -19,7 +19,7 @@ public class PedidoProducto extends Base{
     @Column(name="cant_producto")
     private int cant_producto;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name= "fk_producto")
     private Producto producto;
 }
