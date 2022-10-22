@@ -30,4 +30,5 @@ public class Tarjeta extends Base{
 
     @Column(name="vencimiento")
     private Date vencimiento;
+
 }

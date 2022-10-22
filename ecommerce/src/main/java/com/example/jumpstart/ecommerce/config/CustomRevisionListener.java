@@ -1,6 +1,7 @@
 package com.example.jumpstart.ecommerce.config;
 
-import com.example.persona.entities.audit.Revision;
+
+import com.example.jumpstart.ecommerce.entities.audit.Revision;
 import org.hibernate.envers.RevisionListener;
 
 public class CustomRevisionListener implements RevisionListener {

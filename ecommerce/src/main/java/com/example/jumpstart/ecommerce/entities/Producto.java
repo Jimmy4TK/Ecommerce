@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="producto")
@@ -18,13 +17,31 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Audited
 public class Producto extends Base{
-    @Column(name="")
+    @Column(name="codProducto")
+    private String codProducto;
 
-    @Column(name="")
+    @Column(name="nombreProducto")
+    private String nombreProducto;
 
-    @Column(name="")
+    @Column(name="descuento")
+    private int descuento;
 
-    @Column(name="")
+    @Column(name="stock")
+    private int stock;
 
-    @Column(name="")
+    @Column(name="precio")
+    private int precio;
+
+    @Column(name="Litro")
+    private int litro;
+
+    @Column(name="masVendido")
+    private Boolean masVendido;
+
+    @Column(name="Recomendado")
+    private Boolean recomendado;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_categoria")
+    private Categoria categoria;
 }

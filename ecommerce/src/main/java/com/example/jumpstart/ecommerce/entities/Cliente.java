@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="cliente")
@@ -33,4 +35,10 @@ public class Cliente extends Base{
 
     @Column(name="mail")
     private String mail;
+
+    @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
+    private List<Tarjeta> tarjeta= new ArrayList<Tarjeta>();
+
+    @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
+    private List<Domicilio> domicilios= new ArrayList<Domicilio>();
 }

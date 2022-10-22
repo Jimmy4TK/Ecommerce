@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,13 +16,21 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Audited
-public class Factura extends Base{
-    @Column(name="total")
+public class Factura extends Base {
+    @Column(name = "total")
     private float total;
 
-    @Column(name="fecha")
+    @Column(name = "fecha")
     private Date fecha;
 
-    @Column(name="tipo")
+    @Column(name = "tipo")
     private char tipo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_cliente")
+    private Cliente cliente;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_tarjeta")
+    private Tarjeta tarjeta;
 }

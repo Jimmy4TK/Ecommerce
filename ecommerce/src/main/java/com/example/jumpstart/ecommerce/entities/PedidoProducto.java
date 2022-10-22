@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="pedidoproducto")
@@ -20,4 +18,8 @@ import javax.persistence.Table;
 public class PedidoProducto extends Base{
     @Column(name="cant_producto")
     private int cant_producto;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name= "fk_producto")
+    private Producto producto;
 }
