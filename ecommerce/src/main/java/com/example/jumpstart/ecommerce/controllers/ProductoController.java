@@ -19,4 +19,12 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
         }
     }
+    @GetMapping("/searchRecomended")
+    public ResponseEntity<?> searchRecomended(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchRecomended(pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
 }

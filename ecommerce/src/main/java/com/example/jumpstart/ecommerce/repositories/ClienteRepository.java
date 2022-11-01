@@ -12,5 +12,6 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long>{
     @Query(value="SELECT * FROM cliente WHERE cliente.nombre LIKE %:filtro% OR cliente.apellido Like %:filtro%",
             countQuery = "SELECT count(*) FROM cliente",
             nativeQuery = true)
+
     Page<Cliente> search(@Param("filtro") String filtro, Pageable pageable);
 }
