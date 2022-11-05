@@ -1,0 +1,25 @@
+<nav th:fragment="nav_bar" class="navbar navbar-expand-lg navbar-light bg-orange">
+    <div class="container mt-2 mb-2">
+        <a class="navbar-brand" th:href="@{/inicio}">JumpStart-Ecommerce</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0 col-8" th:action="@{/busqueda}">
+                <button class="btn bg-light my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                <input class="form-control mr-sm-2 col-10" type="search" placeholder="Search" aria-label="Search" name="query">
+            </form>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/inicio}">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/crud}">CRUD</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn bg-light mr-2" type="submit">login</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn bg-light" type="submit">sign up</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
