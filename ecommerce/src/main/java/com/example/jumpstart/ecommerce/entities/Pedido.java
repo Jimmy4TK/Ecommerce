@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="pedidoproducto")
+@Table(name="pedidos")
 @Getter
 @Setter
 @AllArgsConstructor
