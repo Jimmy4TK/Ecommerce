@@ -8,7 +8,9 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name="categorias")
@@ -19,9 +21,9 @@ import javax.persistence.Table;
 @Audited
 public class Categoria extends Base{
 
-    @Column(name="nombre")
     private String nombre;
+    private boolean activo = true;
 
-
-
+    @OneToMany(mappedBy = "categoria")
+    private List<Producto> productos;
 }

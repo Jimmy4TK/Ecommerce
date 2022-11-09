@@ -1,4 +1,4 @@
-package com.example.jumpstart.ecommerce.controllers;
+package com.example.jumpstart.ecommerce.entities.controllers;
 
 import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.services.CategoriaService;
@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.validation.Valid;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 
-@RestController
-@CrossOrigin(origins = "*")
-@RequestMapping(path = "jumpstart/v1/productos")
+@Controller
 public class ProductoController extends BaseControllerImpl<Producto, ProductoServiceImpl> {
     @Autowired
     private ProductoService svcProducto;
@@ -36,7 +38,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     }
 
     @GetMapping("/formulario/producto/{id}")
-    public String formularioVideojuego(Model model, @PathVariable("id")long id){
+    public String formularioProducto(Model model, @PathVariable("id")long id){
         try {
             model.addAttribute("categorias",this.svcCategoria.findAll(Pageable.unpaged()));
             if(id==0){
@@ -52,7 +54,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     }
 
     @PostMapping("/formulario/producto/{id}")
-    public String guardarVideojuego(
+    public String guardarProducto(
             @RequestParam("archivo") MultipartFile archivo,
             @Valid @ModelAttribute("producto") Producto producto,
             BindingResult result,
@@ -64,7 +66,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             if(result.hasErrors()){
                 return "views/formulario/producto";
             }
-            String ruta = "C://Videojuegos/imagenes";
+            String ruta = "C://Productos/imagenes";
             int index = archivo.getOriginalFilename().indexOf(".");
             String extension = "";
             extension = "."+archivo.getOriginalFilename().substring(index+1);
@@ -91,11 +93,11 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
                 if(!archivo.isEmpty()){
                     if(!this.validarExtension(archivo)){
                         model.addAttribute("errorImagenMsg","La extension no es valida");
-                        return "views/formulario/videojuego";
+                        return "views/formulario/producto";
                     }
                     if(archivo.getSize() >= 15000000){
                         model.addAttribute("errorImagenMsg","El peso excede 15MB");
-                        return "views/formulario/videojuego";
+                        return "views/formulario/producto";
                     }
                     Files.write(rutaAbsoluta,archivo.getBytes());
                 }
@@ -108,10 +110,10 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/eliminar/videojuego/{id}")
-    public String eliminarVideojuego(Model model,@PathVariable("id")long id){
+    @GetMapping("/eliminar/producto/{id}")
+    public String eliminarProducto(Model model,@PathVariable("id")long id){
         try {
-            model.addAttribute("videojuego",this.svcProducto.findById(id));
+            model.addAttribute("producto",this.svcProducto.findById(id));
             return "views/formulario/eliminar";
         }catch(Exception e){
             model.addAttribute("error", e.getMessage());
@@ -119,8 +121,8 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @PostMapping("/eliminar/videojuego/{id}")
-    public String desactivarVideojuego(Model model,@PathVariable("id")long id){
+    @PostMapping("/eliminar/producto/{id}")
+    public String desactivarProducto(Model model,@PathVariable("id")long id){
         try {
             this.svcProducto.delete(id);
             return "redirect:/crud";

@@ -1,10 +1,7 @@
-package com.example.jumpstart.ecommerce.controllers;
+package com.example.jumpstart.ecommerce.entities.controllers;
 
 import com.example.jumpstart.ecommerce.entities.Domicilio;
 import com.example.jumpstart.ecommerce.services.DomicilioServiceImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
