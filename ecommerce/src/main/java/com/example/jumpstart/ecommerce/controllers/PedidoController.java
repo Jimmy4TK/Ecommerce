@@ -11,4 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "jumpstart/v1/pedidos")
 public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceImpl>{
+
+    @GetMapping("/searchClientFac")
+    public ResponseEntity<?> searchClientFac(@RequestParam int fkCliente, Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchClientFac(fkCliente,pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
 }
