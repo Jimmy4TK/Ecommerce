@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="pedidoproducto")
+@Table(name="pedido")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,8 +28,8 @@ public class Pedido extends Base{
     @Column(name="fechaFin")
     private Date fechaFin;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PedidoProducto> pedidoProductos = new ArrayList<PedidoProducto>();
+    @Column(name="pagado")
+    private Boolean pagado;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_cliente")
