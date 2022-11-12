@@ -1,4 +1,4 @@
-package com.example.jumpstart.ecommerce.entities.controllers;
+package com.example.jumpstart.ecommerce.controllers;
 
 import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.services.CategoriaService;
@@ -34,6 +34,17 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro,pageable));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+    @GetMapping("/detalle/{id}")
+    public String detalleProducto(Model model, @PathVariable("id") long id) {
+        try {
+            Producto producto = this.svcProducto.findById(id);
+            model.addAttribute("producto", producto);
+            return "views/detalle";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
 

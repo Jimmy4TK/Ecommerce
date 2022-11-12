@@ -15,18 +15,19 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"th:text="*{nombre_producto}">Nombre del Producto</h5>
+                        <h5 class="card-title"th:text="*{titulo}">Card title</h5>
                         <p class="card-text">Precio : <span th:text="*{precio}">1</span></p>
                         <p class="card-text" th:if="*{stock}">
                             Cantidad: <span th:text="*{stock}"></span>
                         </p>
                         <p class="card-text" th:unless="*{stock}">
                             <span class="text-danger">No hay stock</span>
-                        </p>producto
+                        </p>
                     </div>
                     <hr>
-                    <p class="card-text">Descuento : <span th:text="*{descuento}">1</span></p>
-                    <p class="card-text">Litro : <span th:text="*{litro}">1</span></p>
+                    <div class="card-body">
+                        <p class="card-text" th:text="*{descripcion}"></p>
+                    </div>
                 </div>
             </div>
             <div class="col-12 mt-5">

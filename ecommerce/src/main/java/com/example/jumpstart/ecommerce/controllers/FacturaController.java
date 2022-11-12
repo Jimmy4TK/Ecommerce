@@ -1,4 +1,4 @@
-package com.example.jumpstart.ecommerce.entities.controllers;
+package com.example.jumpstart.ecommerce.controllers;
 
 import com.example.jumpstart.ecommerce.entities.Factura;
 import com.example.jumpstart.ecommerce.services.FacturaServiceImpl;
