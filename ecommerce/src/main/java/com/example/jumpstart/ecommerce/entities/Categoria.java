@@ -23,7 +23,4 @@ public class Categoria extends Base{
 
     private String nombre;
     private boolean activo = true;
-
-    @OneToMany(mappedBy = "categoria")
-    private List<Producto> productos;
 }

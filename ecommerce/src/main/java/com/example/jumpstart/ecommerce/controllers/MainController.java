@@ -1,5 +1,6 @@
 package com.example.jumpstart.ecommerce.controllers;
 
+import com.example.jumpstart.ecommerce.entities.Categoria;
 import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.services.CategoriaService;
 import com.example.jumpstart.ecommerce.services.ProductoService;
@@ -43,9 +44,10 @@ public class MainController {
     @GetMapping("/inicio")
     public String inicio(Model model, Pageable pageable) {
         try {
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
             Page<Producto> productos = this.svcProducto.findAll(pageable);
             model.addAttribute("productos", productos);
-
             return "views/inicio";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());

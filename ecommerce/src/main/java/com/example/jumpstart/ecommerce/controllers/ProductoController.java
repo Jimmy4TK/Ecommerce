@@ -1,5 +1,6 @@
 package com.example.jumpstart.ecommerce.controllers;
 
+import com.example.jumpstart.ecommerce.entities.Categoria;
 import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.services.CategoriaService;
 import com.example.jumpstart.ecommerce.services.ProductoService;
@@ -73,11 +74,15 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/inicio/categoria/{id}")
+    @GetMapping("/inicio/categorias/{id}/productos")
     public String searchByCategory(Model model, @PathVariable("id")long id, Pageable pageable) {
         try {
-            Page<Producto> producto = this.svcProducto.searchByCategory(id,pageable);
-            model.addAttribute("producto", producto);
+            //Categoria
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
+            //Productos
+            Page<Producto> productos = this.svcProducto.searchByCategory(id,pageable);
+            model.addAttribute("productos", productos);
             return "views/inicio";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
@@ -85,12 +90,19 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/searchByPrice")
-    public ResponseEntity<?> searchByPrice(@RequestParam float priceMin,@RequestParam float priceMax,Pageable pageable){
+    @GetMapping("/inicio/productos/price")
+    public String searchByPrice(Model model,@RequestParam float pricemin,@RequestParam float pricemax,Pageable pageable){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchByPrice( priceMin,  priceMax, pageable));
+            //Categorias
+            //Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            //model.addAttribute("categorias", categorias);
+            //Productos
+            Page<Producto> productos = this.svcProducto.searchByPrice(pricemin,pricemax,pageable);
+            model.addAttribute("productos", productos);
+            return "views/inicio";
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
     @GetMapping("/search")

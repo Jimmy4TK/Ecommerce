@@ -24,18 +24,18 @@ public interface ProductoRepository extends BaseRepository<Producto, Long>{
 
 
     //BUSQUEDA POR CATEGORIA DE PRODUCTO
-    @Query(value = "SELECT * FROM producto WHERE producto.fk_categoria LIKE %:categoryid%",
-            countQuery = "SELECT count(*) FROM producto",
+    @Query(value = "SELECT * FROM productos WHERE productos.fk_categoria LIKE %:categoryid%",
+            countQuery = "SELECT count(*) FROM productos",
             nativeQuery = true)
     Page<Producto> searchByCategory(@Param("categoryid")long category,Pageable pageable);
 
 
     //BUSQUEDA FILTRANDO POR RANGO DE PRECIO
     @Query(
-            value = "SELECT * FROM producto WHERE producto.precio BETWEEN %:priceMin% and %:priceMax%",
-            countQuery = "select count(*) from producto",
+            value = "SELECT * FROM productos WHERE productos.precio BETWEEN 0 AND 300",
+            countQuery = "select count(*) from productos",
             nativeQuery = true)
-    Page<Producto> searchByPrice(@Param("priceMin") float priceMin, @Param("priceMax") float priceMax,Pageable pageable);
+    Page<Producto> searchByPrice(@Param("pricemin") float pricemin, @Param("pricemax") float pricemax,Pageable pageable);
 
 
     //BUSQUEDA ORDENANDO POR PRECIO DE MANERA ASCENDENTE

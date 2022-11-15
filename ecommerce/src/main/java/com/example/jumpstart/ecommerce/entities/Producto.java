@@ -45,7 +45,7 @@ public class Producto extends Base{
     private Estudio estudio;*/
 
     @NotNull(message="Es requerida la categoria")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_categoria", nullable = false)
     private Categoria categoria;
 }

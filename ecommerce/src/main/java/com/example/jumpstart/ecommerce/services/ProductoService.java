@@ -10,7 +10,7 @@ public interface ProductoService extends BaseService<Producto, Long>{
 
     Page<Producto> searchByCategory(long id, Pageable pageable) throws Exception;
 
-    Page<Producto> searchByPrice(float priceMin, float priceMax,Pageable pageable) throws Exception;
+    Page<Producto> searchByPrice(float pricemin, float pricemax,Pageable pageable) throws Exception;
 
     Page<Producto> orderAscPrice(Pageable pageable) throws Exception;
 

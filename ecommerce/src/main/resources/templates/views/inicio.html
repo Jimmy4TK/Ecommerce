@@ -11,18 +11,9 @@
 <div class="container">
     <div class="col-2 col-2 position-absolute start-0">
         <ul class="nav flex-column .bg-secondary">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/inicio/categoria/1}">Champagne</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-            </li>
+            <div th:each="categoria : ${categorias}">
+                <div th:replace="components/card :: categoria_li"></div>
+            </div>
             <li>
                 <label for="customRange2" class="form-label">Example range</label>
                 <input type="range" class="form-range position-absolute" min="0" max="5" id="customRange2">

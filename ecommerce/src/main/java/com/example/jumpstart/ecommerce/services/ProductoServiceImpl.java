@@ -46,9 +46,9 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     }
 
     @Override
-    public Page<Producto> searchByPrice(float priceMin, float priceMax, Pageable pageable) throws Exception {
+    public Page<Producto> searchByPrice(float pricemin, float pricemax, Pageable pageable) throws Exception {
         try{
-            Page<Producto> productos = productoRepository.searchByPrice(priceMin, priceMax, pageable);
+            Page<Producto> productos = productoRepository.searchByPrice(pricemin, pricemax, pageable);
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());
