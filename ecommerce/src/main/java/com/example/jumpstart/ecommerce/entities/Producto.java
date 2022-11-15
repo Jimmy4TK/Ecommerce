@@ -20,8 +20,9 @@ import java.util.Date;
 @Audited
 public class Producto extends Base{
 
-    @NotEmpty(message = "{NotEmpty.Producto.titulo}")
+    @NotEmpty(message = "No puede ser nulo el titulo")
     private String titulo;
+
     @Size(min=5,max=100,message= "La descripcion debe ser entre 5 y 100 caracteres")
     private String descripcion;
 
@@ -30,6 +31,7 @@ public class Producto extends Base{
     @Min(value = 5,message="El precio debe tener un minimo de 5")
     @Max(value = 10000, message="El precio debe ser menor a 1000")
     private float precio;
+
     @Min(value = 1,message="El stock debe tener un minimo de 5")
     @Max(value = 10000, message="El stock debe ser menor a 1000")
     private short stock;

@@ -1,3 +1,6 @@
 .bg-orange{
     background-color: #ff6000;
 }
+.range-bar-transparent{
+    form-range-track-bg: transparent;
+}

@@ -9,23 +9,28 @@
 <body>
 <nav th:replace="components/navbar :: nav_bar"></nav>
 <div class="container">
+    <div class="col-2 col-2 position-absolute start-0">
+        <ul class="nav flex-column .bg-secondary">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+            <li>
+                <label for="customRange2" class="form-label">Example range</label>
+                <input type="range" class="form-range position-absolute" min="0" max="5" id="customRange2">
+                <input type="range" class="form-range position-absolute" min="0" max="5" id="customRange1">
+            </li>
+        </ul>
+    </div>
     <div class="row">
-        <div class="col-2">
-            <ul class="nav flex-column .bg-secondary">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
-        </div>
         <div class="col-10 col-md-3" th:each="producto : ${productos}">
             <div th:replace="components/card :: _card"></div>
         </div>
