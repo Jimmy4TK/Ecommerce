@@ -36,9 +36,9 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     }
 
     @Override
-    public Page<Producto> searchByCategory(String category, Pageable pageable) throws Exception {
+    public Page<Producto> searchByCategory(long id, Pageable pageable) throws Exception {
         try{
-            Page<Producto> productos = productoRepository.searchByCategory(category, pageable);
+            Page<Producto> productos = productoRepository.searchByCategory(id, pageable);
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());

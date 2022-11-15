@@ -24,10 +24,10 @@ public interface ProductoRepository extends BaseRepository<Producto, Long>{
 
 
     //BUSQUEDA POR CATEGORIA DE PRODUCTO
-    @Query(value = "SELECT * FROM producto WHERE producto.categoria LIKE %:category%",
+    @Query(value = "SELECT * FROM producto WHERE producto.fk_categoria LIKE %:categoryid%",
             countQuery = "SELECT count(*) FROM producto",
             nativeQuery = true)
-    Page<Producto> searchByCategory(@Param("category")String category,Pageable pageable);
+    Page<Producto> searchByCategory(@Param("categoryid")long category,Pageable pageable);
 
 
     //BUSQUEDA FILTRANDO POR RANGO DE PRECIO

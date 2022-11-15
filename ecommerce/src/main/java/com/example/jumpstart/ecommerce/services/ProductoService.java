@@ -8,7 +8,7 @@ public interface ProductoService extends BaseService<Producto, Long>{
     Page<Producto> search(String filtro, Pageable pageable) throws Exception;
     Page<Producto> searchRecomended(Pageable pageable) throws Exception;
 
-    Page<Producto> searchByCategory(String category, Pageable pageable) throws Exception;
+    Page<Producto> searchByCategory(long id, Pageable pageable) throws Exception;
 
     Page<Producto> searchByPrice(float priceMin, float priceMax,Pageable pageable) throws Exception;
 

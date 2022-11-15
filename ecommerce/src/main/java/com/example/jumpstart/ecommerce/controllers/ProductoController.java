@@ -5,6 +5,7 @@ import com.example.jumpstart.ecommerce.services.CategoriaService;
 import com.example.jumpstart.ecommerce.services.ProductoService;
 import com.example.jumpstart.ecommerce.services.ProductoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,70 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     @Autowired
     private CategoriaService svcCategoria;
 
+    @GetMapping("/orderAscPrice")
+    public ResponseEntity<?> orderAscPrice(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderAscPrice( pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+
+    @GetMapping("/orderDescPrice")
+    public ResponseEntity<?> orderDescPrice(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderDescPrice(pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+
+    @GetMapping("/searchMostSelled")
+    public ResponseEntity<?> searchMostSelled(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchMostSelled(pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+
+    @GetMapping("/searchInDiscount")
+    public ResponseEntity<?> searchInDiscount(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchInDiscount(pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+    @GetMapping("/searchRecomended")
+    public ResponseEntity<?> searchRecomended(Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchRecomended(pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+
+    @GetMapping("/inicio/categoria/{id}")
+    public String searchByCategory(Model model, @PathVariable("id")long id, Pageable pageable) {
+        try {
+            Page<Producto> producto = this.svcProducto.searchByCategory(id,pageable);
+            model.addAttribute("producto", producto);
+            return "views/inicio";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping("/searchByPrice")
+    public ResponseEntity<?> searchByPrice(@RequestParam float priceMin,@RequestParam float priceMax,Pageable pageable){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchByPrice( priceMin,  priceMax, pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable){
         try {
@@ -131,6 +196,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
+
 
     @PostMapping("/eliminar/producto/{id}")
     public String desactivarProducto(Model model,@PathVariable("id")long id){
