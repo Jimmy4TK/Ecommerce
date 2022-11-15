@@ -30,6 +30,27 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
     public UsuarioServiceImpl(BaseRepository<Usuario, Long> baseRepository) {
         super(baseRepository);
     }
+
+    @Override
+    public void validar(String nombre, String apellido, String email, String contrasena) throws Exception{
+
+        if (nombre == null || nombre.isEmpty()){
+            throw new Exception("el nombre no puede ser nulo o estar vacio");
+        }
+        if (apellido == null || apellido.isEmpty()){
+            throw new Exception("el apellido no puede ser nulo o estar vacio");
+        }
+        if (contrasena == null || contrasena.isEmpty()){
+            throw new Exception("el contrasena no puede ser nulo o estar vacio");
+        }
+        if (email == null ||  email.isEmpty()){
+            throw new Exception("el mail no puede ser nulo o estar vacio");
+        }
+        Usuario usuario = usuarioRepository.searchByMail(email);
+        if (usuario != null){
+            throw new Exception("El mail ya esta registrado");
+        }
+    }
     @Override
     public Page<Usuario> search(String filtro, Pageable pageable) throws Exception {
         try{

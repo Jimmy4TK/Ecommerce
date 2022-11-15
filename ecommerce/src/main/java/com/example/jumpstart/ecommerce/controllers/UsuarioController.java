@@ -1,13 +1,10 @@
 package com.example.jumpstart.ecommerce.controllers;
 
 import com.example.jumpstart.ecommerce.entities.Usuario;
-import com.example.jumpstart.ecommerce.services.UsuarioService;
 import com.example.jumpstart.ecommerce.services.UsuarioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
