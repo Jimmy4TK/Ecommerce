@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="pedidoproducto")
+@Table(name="pedidos")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,8 +32,8 @@ public class Pedido extends Base{
     private List<PedidoProducto> pedidoProductos = new ArrayList<PedidoProducto>();
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_cliente")
-    private Cliente cliente;
+    @JoinColumn(name = "fk_usuario")
+    private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_domicilio")

@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="factura")
+@Table(name="facturas")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,8 +27,8 @@ public class Factura extends Base {
     private char tipo;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_cliente")
-    private Cliente cliente;
+    @JoinColumn(name = "fk_usuario")
+    private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_tarjeta")
