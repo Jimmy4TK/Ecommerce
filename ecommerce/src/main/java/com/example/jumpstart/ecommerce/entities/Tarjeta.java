@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name="tarjeta")
+@Table(name="tarjetas")
 @Getter
 @Setter
 @AllArgsConstructor

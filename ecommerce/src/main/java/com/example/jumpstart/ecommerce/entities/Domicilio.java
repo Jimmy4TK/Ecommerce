@@ -9,7 +9,7 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 
 @Entity
-@Table(name="domicilio")
+@Table(name="domicilios")
 @Getter
 @Setter
 @AllArgsConstructor

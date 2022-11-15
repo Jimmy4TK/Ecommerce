@@ -1,5 +1,6 @@
 package com.example.jumpstart.ecommerce.entities;
 
+import com.example.jumpstart.ecommerce.enumerations.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="cliente")
+@Table(name="usuarios")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Audited
-public class Cliente extends Base{
+public class Usuario extends Base{
+
     @Column(name="nombre")
     private String nombre;
 
@@ -36,9 +38,17 @@ public class Cliente extends Base{
     @Column(name="mail")
     private String mail;
 
-    @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
+    @Column(name = "contrasena")
+    private String contrasena;
+
+    @Column(name = "rol")
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
+    @OneToMany(cascade= CascadeType.ALL,orphanRemoval = true)
     private List<Tarjeta> tarjetas= new ArrayList<Tarjeta>();
 
     @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
     private List<Domicilio> domicilios= new ArrayList<Domicilio>();
+
 }
