@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class MainController {
     @Autowired
@@ -25,14 +23,23 @@ public class MainController {
     private CategoriaService svcCategoria;
     @Autowired
     private UsuarioService usuarioService;
-
     @GetMapping(value = "/")
     public String index(Model model) {
         String saludo = "Hola Thymeleaf";
         model.addAttribute("saludo", saludo);
         return "index";
     }
-
+    @PostMapping(value = "/registro")
+    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String contrasena, ModelMap modelo){
+        try {
+            usuarioService.registrar(mail, nombre, apellido, contrasena);
+            modelo.put("exito", "Registrado correctamente");
+            return  "views/inicio";
+        }catch(Exception e){
+            modelo.put("error", e.getMessage());
+            return "views/inicio";
+        }
+    }
     @GetMapping("/inicio")
     public String inicio(Model model, Pageable pageable) {
         try {
@@ -43,18 +50,6 @@ public class MainController {
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "error";
-        }
-    }
-
-    @PostMapping(value = "/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String contrasena, ModelMap modelo){
-        try {
-            usuarioService.registrar(mail, nombre, apellido, contrasena);
-            modelo.put("exito", "Registrado correctamente");
-            return  "views/inicio";
-        }catch(Exception e){
-            modelo.put("error", e.getMessage());
-            return "views/inicio";
         }
     }
 

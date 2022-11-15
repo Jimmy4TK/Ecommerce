@@ -1,7 +1,6 @@
 package com.example.jumpstart.ecommerce.repositories;
 
 import com.example.jumpstart.ecommerce.entities.Factura;
-import com.example.jumpstart.ecommerce.entities.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +14,4 @@ public interface FacturaRepository extends BaseRepository<Factura, Long>{
             countQuery = "SELECT count(*) FROM producto",
             nativeQuery = true)
     Page<Factura> searchClientFac(@Param("fkCliente") int fkCliente, Pageable pageable);
-
-
 }

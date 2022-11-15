@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "jumpstart/v1/pedidos")
 public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceImpl>{
-
     @GetMapping("/searchClientFac")
     public ResponseEntity<?> searchClientFac(@RequestParam int fkCliente, Pageable pageable){
         try {

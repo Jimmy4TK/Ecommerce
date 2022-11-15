@@ -5,9 +5,7 @@ import com.example.jumpstart.ecommerce.services.CategoriaService;
 import com.example.jumpstart.ecommerce.services.ProductoService;
 import com.example.jumpstart.ecommerce.services.ProductoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,12 +27,24 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     private ProductoService svcProducto;
     @Autowired
     private CategoriaService svcCategoria;
+
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro,pageable));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+        }
+    }
+    @GetMapping("/detalle/{id}")
+    public String detalleProducto(Model model, @PathVariable("id") long id) {
+        try {
+            Producto producto = this.svcProducto.findById(id);
+            model.addAttribute("producto", producto);
+            return "views/detalle";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
 
@@ -123,7 +133,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     }
 
     @PostMapping("/eliminar/producto/{id}")
-    public String desactivarProducto(Model model, @PathVariable("id")long id){
+    public String desactivarProducto(Model model,@PathVariable("id")long id){
         try {
             this.svcProducto.delete(id);
             return "redirect:/crud";
@@ -143,68 +153,4 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return false;
         }
     }
-    @GetMapping("/searchRecomended")
-    public ResponseEntity<?> searchRecomended(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchRecomended(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/searchByCategory")
-    public ResponseEntity<?> searchByCategory(@RequestParam String category, Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchByCategory(category, pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-
-    @GetMapping("/searchByPrice")
-    public ResponseEntity<?> searchByPrice(@RequestParam float priceMin,@RequestParam float priceMax,Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchByPrice( priceMin,  priceMax, pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/orderAscPrice")
-    public ResponseEntity<?> orderAscPrice(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderAscPrice( pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/orderDescPrice")
-    public ResponseEntity<?> orderDescPrice(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderDescPrice(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/searchMostSelled")
-    public ResponseEntity<?> searchMostSelled(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchMostSelled(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/searchInDiscount")
-    public ResponseEntity<?> searchInDiscount(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchInDiscount(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
 }

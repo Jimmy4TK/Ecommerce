@@ -7,11 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.temporal.ValueRange;
-
 @Repository
 public interface PedidoProductoRepository extends BaseRepository<PedidoProducto, Long>{
-
     @Query(value="SELECT * FROM pedidoproducto WHERE pedidoproducto.fk_factura LIKE %:numberFac%",
             countQuery = "SELECT count(*) FROM usuario",
             nativeQuery = true)

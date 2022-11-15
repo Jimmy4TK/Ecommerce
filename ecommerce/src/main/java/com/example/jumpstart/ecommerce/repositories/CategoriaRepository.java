@@ -12,10 +12,8 @@ import java.util.List;
 
 @Repository
 public interface CategoriaRepository extends BaseRepository<Categoria, Long>{
-
     @Query(value="SELECT * FROM categoria WHERE categoria.nombre LIKE %:filtro%",
             countQuery = "SELECT count(*) FROM cliente",
             nativeQuery = true)
     Page<Categoria> searchForCategory(@Param("filtro") String filtro, Pageable pageable);
-
 }

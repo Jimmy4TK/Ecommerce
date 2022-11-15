@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductoRepository extends BaseRepository<Producto, Long>{
-
     //BUSQUEDA POR NOMBRE DE PRODUCTO
     @Query(value="SELECT * FROM producto WHERE producto.nombre LIKE %:filtro%",
             countQuery = "SELECT count(*) FROM producto",
@@ -19,8 +18,8 @@ public interface ProductoRepository extends BaseRepository<Producto, Long>{
 
     // BUSQUEDA DE RECOMENDADOS
     @Query(value = "SELECT * FROM producto WHERE producto.recomendado = '1'",
-    countQuery = "SELECT count(*) FROM producto",
-    nativeQuery = true)
+            countQuery = "SELECT count(*) FROM producto",
+            nativeQuery = true)
     Page<Producto> searchRecomended(Pageable pageable);
 
 
@@ -53,13 +52,11 @@ public interface ProductoRepository extends BaseRepository<Producto, Long>{
             nativeQuery = true)
     Page<Producto> orderDescPrice(Pageable pageable);
 
-
     //BUSQUEDA DE LOS PRODUCTOS MAS VENDIDOS
     @Query(value = "SELECT * FROM producto WHERE producto.masVendido = '1'",
             countQuery = "SELECT count(*) FROM producto",
             nativeQuery = true)
     Page<Producto> searchMostSelled(Pageable pageable);
-
 
     //BUSQUEDA DE PRODUCTOS EN DESCUENTO
     @Query(value = "SELECT * FROM producto WHERE producto.descuento <> 0 ",

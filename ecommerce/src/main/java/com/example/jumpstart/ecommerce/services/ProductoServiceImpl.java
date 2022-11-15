@@ -25,7 +25,6 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
-
     @Override
     public Page<Producto> searchRecomended(Pageable pageable) throws Exception {
         try{
@@ -90,5 +89,6 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());
-        }    }
+        }
+    }
 }
