@@ -30,47 +30,30 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     @Autowired
     private CategoriaService svcCategoria;
 
-    @GetMapping("/orderAscPrice")
-    public ResponseEntity<?> orderAscPrice(Pageable pageable){
+    @GetMapping("/inicio/productos/priceasc")
+    public String searchAsc(Model model, Pageable pageable){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderAscPrice( pageable));
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
+            Page<Producto> productos = this.svcProducto.orderAscPrice(pageable);
+            model.addAttribute("productos", productos);
+            return "views/inicio";
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
-
-    @GetMapping("/orderDescPrice")
-    public ResponseEntity<?> orderDescPrice(Pageable pageable){
+    @GetMapping("/inicio/productos/pricedesc")
+    public String searchDesc(Model model, Pageable pageable){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.orderDescPrice(pageable));
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
+            Page<Producto> productos = this.svcProducto.orderDescPrice(pageable);
+            model.addAttribute("productos", productos);
+            return "views/inicio";
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/searchMostSelled")
-    public ResponseEntity<?> searchMostSelled(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchMostSelled(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-
-    @GetMapping("/searchInDiscount")
-    public ResponseEntity<?> searchInDiscount(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchInDiscount(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
-        }
-    }
-    @GetMapping("/searchRecomended")
-    public ResponseEntity<?> searchRecomended(Pageable pageable){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.searchRecomended(pageable));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
 
@@ -94,8 +77,8 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     public String searchByPrice(Model model,@RequestParam float pricemin,@RequestParam float pricemax,Pageable pageable){
         try {
             //Categorias
-            //Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
-            //model.addAttribute("categorias", categorias);
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
             //Productos
             Page<Producto> productos = this.svcProducto.searchByPrice(pricemin,pricemax,pageable);
             model.addAttribute("productos", productos);
@@ -106,11 +89,18 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable){
+    public String search(Model model, @RequestParam String filtro, Pageable pageable){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro,pageable));
+            //Categorias
+            Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
+            model.addAttribute("categorias", categorias);
+            //Productos
+            Page<Producto> productos = this.svcProducto.search(filtro,pageable);
+            model.addAttribute("productos", productos);
+            return "views/inicio";
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+ e.getMessage() + "\"}"));
+            model.addAttribute("error", e.getMessage());
+            return "error";
         }
     }
     @GetMapping("/detalle/{id}")

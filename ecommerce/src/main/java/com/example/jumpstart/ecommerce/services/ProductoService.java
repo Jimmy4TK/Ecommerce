@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductoService extends BaseService<Producto, Long>{
     Page<Producto> search(String filtro, Pageable pageable) throws Exception;
-    Page<Producto> searchRecomended(Pageable pageable) throws Exception;
 
     Page<Producto> searchByCategory(long id, Pageable pageable) throws Exception;
 
@@ -15,8 +14,4 @@ public interface ProductoService extends BaseService<Producto, Long>{
     Page<Producto> orderAscPrice(Pageable pageable) throws Exception;
 
     Page<Producto> orderDescPrice(Pageable pageable) throws Exception;
-
-    Page<Producto> searchMostSelled(Pageable pageable) throws Exception;
-
-    Page<Producto> searchInDiscount(Pageable pageable) throws Exception;
 }

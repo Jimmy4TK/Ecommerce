@@ -14,10 +14,14 @@
             <div th:each="categoria : ${categorias}">
                 <div th:replace="components/card :: categoria_li"></div>
             </div>
-            <li>
-                <label for="customRange2" class="form-label">Example range</label>
-                <input type="range" class="form-range position-absolute" min="0" max="5" id="customRange2">
-                <input type="range" class="form-range position-absolute" min="0" max="5" id="customRange1">
+            <li><a class="nav-link active" th:href="@{/inicio/productos/priceasc}" >Más Barato</a></li>
+            <li><a class="nav-link active" th:href="@{/inicio/productos/pricedesc}" >Más Caro</a></li>
+            <li class="ms-3">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/inicio/productos/price}">
+                    Desde:<input class="form-control mr-sm-2 w-50" type="search" placeholder="Precio Minimo" aria-label="Search" name="pricemin">
+                    Hasta:<input class="form-control mr-sm-2 w-50" type="search" placeholder="Precio Maximo" aria-label="Search" name="pricemax">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Aplicar</button>
+                </form>
             </li>
         </ul>
     </div>

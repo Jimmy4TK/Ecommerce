@@ -25,15 +25,6 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
-    @Override
-    public Page<Producto> searchRecomended(Pageable pageable) throws Exception {
-        try{
-            Page<Producto> productos = productoRepository.searchRecomended(pageable);
-            return productos;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
 
     @Override
     public Page<Producto> searchByCategory(long id, Pageable pageable) throws Exception {
@@ -62,30 +53,13 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());
-        }    }
+        }
+    }
 
     @Override
     public Page<Producto> orderDescPrice(Pageable pageable) throws Exception {
         try{
             Page<Producto> productos = productoRepository.orderDescPrice(pageable);
-            return productos;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }    }
-
-    @Override
-    public Page<Producto> searchMostSelled(Pageable pageable) throws Exception {
-        try{
-            Page<Producto> productos = productoRepository.searchMostSelled(pageable);
-            return productos;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }    }
-
-    @Override
-    public Page<Producto> searchInDiscount(Pageable pageable) throws Exception {
-        try{
-            Page<Producto> productos = productoRepository.searchInDiscount(pageable);
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());
