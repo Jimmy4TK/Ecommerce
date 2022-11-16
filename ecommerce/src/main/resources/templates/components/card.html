@@ -3,13 +3,16 @@
     <div class="card-body">
         <h5 class="card-title"th:text="${producto.titulo}">Card title</h5>
         <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>
-        <a th:href="@{detalle/{id}(id=${producto.id})}" class="btn btn-primary btn-block">
-            ver detalle
+        <a th:href="@{producto/{id}(id=${producto.id})}" class="btn btn-primary btn-block">
+            Ver Detalle
+        </a>
+        <a th:href="@{producto/{id}(id=${producto.id})}" class="btn btn-primary btn-block">
+            Agregar al Carrito
         </a>
     </div>
 </div>
 <div th:fragment="categoria_li">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" th:href="@{/inicio/categorias/{id}/productos(id=${categoria.id})}" th:text="${categoria.nombre}">Li title</a>
+        <a class="nav-link active" style="color: #f78001;" aria-current="page" th:href="@{/inicio/categorias/{id}/productos(id=${categoria.id})}" th:text="${categoria.nombre}">Li title</a>
     </li>
 </div>

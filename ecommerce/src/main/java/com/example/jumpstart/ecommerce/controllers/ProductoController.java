@@ -103,7 +103,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-    @GetMapping("/detalle/{id}")
+    @GetMapping("/producto/{id}")
     public String detalleProducto(Model model, @PathVariable("id") long id) {
         try {
             Producto producto = this.svcProducto.findById(id);

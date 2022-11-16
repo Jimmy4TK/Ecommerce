@@ -8,19 +8,22 @@
 </head>
 <body>
 <nav th:replace="components/navbar :: nav_bar"></nav>
-<div class="container">
-    <div class="col-2 col-2 position-absolute start-0">
+<div class="container" style="margin-top: 20px">
+    <div class="position-absolute start-0 ms-1 mt-2 border border-2 rounded-2">
         <ul class="nav flex-column .bg-secondary">
+            <div class="ms-1">Filtros:</div>
+            <div class="ms-1">Categorias:</div>
             <div th:each="categoria : ${categorias}">
                 <div th:replace="components/card :: categoria_li"></div>
             </div>
-            <li><a class="nav-link active" th:href="@{/inicio/productos/priceasc}" >Más Barato</a></li>
-            <li><a class="nav-link active" th:href="@{/inicio/productos/pricedesc}" >Más Caro</a></li>
+            <div class="ms-1">Precios:</div>
+            <li><a class="nav-link active" style="color: #f78001;" th:href="@{/inicio/productos/priceasc}" >Más Barato</a></li>
+            <li><a class="nav-link active" style="color: #f78001;" th:href="@{/inicio/productos/pricedesc}" >Más Caro</a></li>
             <li class="ms-3">
                 <form class="form-inline my-2 my-lg-0" th:action="@{/inicio/productos/price}">
-                    Desde:<input class="form-control mr-sm-2 w-50" type="search" placeholder="Precio Minimo" aria-label="Search" name="pricemin">
-                    Hasta:<input class="form-control mr-sm-2 w-50" type="search" placeholder="Precio Maximo" aria-label="Search" name="pricemax">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Aplicar</button>
+                    Desde:<input class="form-control mt-2 mb-2 x|mr-sm-2 w-50" type="search" placeholder="Precio Minimo" aria-label="Search" name="pricemin">
+                    Hasta:<input class="form-control mr-sm-2 w-50 mb-2" type="search" placeholder="Precio Maximo" aria-label="Search" name="pricemax">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Aplicar</button>
                 </form>
             </li>
         </ul>

@@ -1,25 +1,29 @@
 <nav th:fragment="nav_bar" class="navbar navbar-expand-lg navbar-light bg-orange">
-    <div class="container mt-2 mb-2">
-        <a class="navbar-brand" th:href="@{/inicio}">JumpStart-Ecommerce</a>
+    <div class="container-fluid mt-2 mb-2">
+        <a class="navbar-brand text-light" th:href="@{/inicio}" style="font-family: serif; font-style:oblique 5deg;">JumpStart-Ecommerce</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <form class="input-group me-5" th:action="@{/search}">
+            <form class="input-group w-50" style="margin-left: 17rem" th:action="@{/search}">
                 <button class="btn bg-light my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
-                <input class="form-control mr-sm-2 col-10" type="search" placeholder="Tenes sed?" aria-label="Search" name="filtro">
+                <input class="form-control mr-sm-2 col-10" type="search" placeholder="Search" aria-label="Search" name="query">
             </form>
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto position-absolute end-0">
+
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/inicio}">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-light" sec:authorize="hasRole('CLIENTE')" th:href="@{/carrito}" style="margin-right: 10px"><i class="bi bi-cart" style="font-size: 2.5rem;"></i><span class="sr-only"></span></a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/crud}">CRUD</a>
+                    <a class="btn btn-light" style="margin-right: 15px; margin-top: 20px;"  sec:authorize="hasRole('ADMIN')" th:href="@{/crud}">ABM Producto</a>
                 </li>
-                <li class="nav-item">
-                    <button class="btn bg-light mr-2" type="button" data-bs-toggle="modal" data-bs-target="#login" th:if="${session.usuariosession == null}">login</button>
+                <button class="btn btn-light d-grid gap-2 d-md-block" style="height: 35px; width: 90px; margin-right: 15px; margin-top: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#login" th:if="${session.usuariosession == null}">Login</button>
+
+                <button class="btn btn-light d-grid gap-2 d-md-block" style="height: 35px; width: 90px; margin-right: 15px; margin-top: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#signup" th:if="${session.usuariosession == null}">Sign Up</button>
+
+                <li class="nav-item active">
+                    <a class="nav-link text-light" th:href="@{/inicio}" style="margin-right: 10px"><i class="bi bi-cup-straw" style="font-size: 2.5rem;"></i><span class="sr-only"></span></a>
                 </li>
-                <li class="nav-item">
-                    <button class="btn bg-light" type="button" data-bs-toggle="modal" data-bs-target="#signup" th:if="${session.usuariosession == null}">sign up</button>
-                </li>
+
             </ul>
         </div>
     </div>
