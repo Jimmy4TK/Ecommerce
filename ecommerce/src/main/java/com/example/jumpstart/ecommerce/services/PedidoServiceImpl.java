@@ -26,4 +26,10 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public Pedido activePedido(long fk_cliente) throws Exception{
+        Pedido pedido = pedidoRepository.activePedido(fk_cliente);
+        return pedido;
+    }
 }

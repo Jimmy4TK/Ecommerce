@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface PedidoService extends BaseService<Pedido, Long>{
     Page<Pedido> searchClientFac(int fkCliente, Pageable pageable) throws Exception;
+    Pedido activePedido(long fk_cliente) throws Exception;
 }

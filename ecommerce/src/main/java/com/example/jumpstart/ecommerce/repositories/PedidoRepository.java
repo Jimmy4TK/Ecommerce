@@ -9,8 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PedidoRepository extends BaseRepository<Pedido, Long>{
-    @Query(value="SELECT * FROM pedido WHERE pedido.fk_cliente LIKE %:fkCliente% and pedido.pagado = '0'",
-            countQuery = "SELECT count(*) FROM producto",
+    @Query(value="SELECT * FROM pedidos WHERE pedidos.fk_cliente LIKE %:fkCliente% and pedido.pagado = '0'",
+            countQuery = "SELECT count(*) FROM pedidos",
             nativeQuery = true)
     Page<Pedido> searchClientFac(@Param("fkCliente") int fkCliente, Pageable pageable);
+
+    @Query(value="SELECT * FROM pedidos WHERE pedidos.fk_usuario=:fk_usuario AND pedidos.fk_factura IS NULL",
+            countQuery = "SELECT count(*) FROM pedidos",
+            nativeQuery = true)
+    Pedido activePedido(@Param("fk_usuario") long fk_usuario);
 }

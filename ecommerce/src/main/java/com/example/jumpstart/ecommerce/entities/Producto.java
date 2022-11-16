@@ -38,7 +38,6 @@ public class Producto extends Base{
     @NotNull(message="No puede ser nulo la fecha")
     @PastOrPresent(message="Debe ser igual o menor a la fecha de hoy")
     private Date fechaLanzamiento;
-    private boolean activo = true;
 
    /* @NotNull(message="Es requerido el estudio")
     @ManyToOne(fetch = FetchType.EAGER)

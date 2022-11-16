@@ -24,13 +24,14 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 
 @Controller
+@RequestMapping(path = "/productos")
 public class ProductoController extends BaseControllerImpl<Producto, ProductoServiceImpl> {
     @Autowired
     private ProductoService svcProducto;
     @Autowired
     private CategoriaService svcCategoria;
 
-    @GetMapping("/inicio/productos/priceasc")
+    @GetMapping("/priceasc")
     public String searchAsc(Model model, Pageable pageable){
         try {
             Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
@@ -43,7 +44,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-    @GetMapping("/inicio/productos/pricedesc")
+    @GetMapping("/pricedesc")
     public String searchDesc(Model model, Pageable pageable){
         try {
             Page<Categoria> categorias = this.svcCategoria.findAll(pageable);
@@ -57,7 +58,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/inicio/categorias/{id}/productos")
+    @GetMapping("/categorias/{id}")
     public String searchByCategory(Model model, @PathVariable("id")long id, Pageable pageable) {
         try {
             //Categoria
@@ -73,7 +74,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/inicio/productos/price")
+    @GetMapping("/price")
     public String searchByPrice(Model model,@RequestParam float pricemin,@RequestParam float pricemax,Pageable pageable){
         try {
             //Categorias
@@ -103,7 +104,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-    @GetMapping("/producto/{id}")
+    @GetMapping("/{id}/detalle")
     public String detalleProducto(Model model, @PathVariable("id") long id) {
         try {
             Producto producto = this.svcProducto.findById(id);
@@ -115,7 +116,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/formulario/producto/{id}")
+    @GetMapping("/{id}/formulario")
     public String formularioProducto(Model model, @PathVariable("id")long id){
         try {
             model.addAttribute("categorias",this.svcCategoria.findAll(Pageable.unpaged()));
@@ -131,7 +132,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @PostMapping("/formulario/producto/{id}")
+    @PostMapping("/{id}/formulario")
     public String guardarProducto(
             @RequestParam("archivo") MultipartFile archivo,
             @Valid @ModelAttribute("producto") Producto producto,
@@ -188,7 +189,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping("/eliminar/producto/{id}")
+    @GetMapping("/{id}/eliminar")
     public String eliminarProducto(Model model,@PathVariable("id")long id){
         try {
             model.addAttribute("producto",this.svcProducto.findById(id));
@@ -200,7 +201,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     }
 
 
-    @PostMapping("/eliminar/producto/{id}")
+    @PostMapping("/{id}/eliminar")
     public String desactivarProducto(Model model,@PathVariable("id")long id){
         try {
             this.svcProducto.delete(id);
