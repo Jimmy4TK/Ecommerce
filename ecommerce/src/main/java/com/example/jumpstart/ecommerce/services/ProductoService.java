@@ -4,6 +4,8 @@ import com.example.jumpstart.ecommerce.entities.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
+
 public interface ProductoService extends BaseService<Producto, Long>{
     Page<Producto> search(String filtro, Pageable pageable) throws Exception;
 
@@ -14,4 +16,6 @@ public interface ProductoService extends BaseService<Producto, Long>{
     Page<Producto> orderAscPrice(Pageable pageable) throws Exception;
 
     Page<Producto> orderDescPrice(Pageable pageable) throws Exception;
+
+    Page<Producto> findByPedidoProducto(ArrayList<Long> listaid, Pageable pageable) throws Exception;
 }

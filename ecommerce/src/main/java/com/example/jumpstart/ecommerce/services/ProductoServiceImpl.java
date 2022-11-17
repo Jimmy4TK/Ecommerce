@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService{
     @Autowired
@@ -62,6 +64,16 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             Page<Producto> productos = productoRepository.orderDescPrice(pageable);
             return productos;
         }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<Producto> findByPedidoProducto(ArrayList<Long> listaid, Pageable pageable) throws Exception {
+        try {
+            Page<Producto> productos = productoRepository.findByPedidoProducto(listaid,pageable);
+            return productos;
+        }   catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }

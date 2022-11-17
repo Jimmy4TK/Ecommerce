@@ -24,6 +24,6 @@ public class PedidoProducto extends Base{
     private Producto producto;
 
     @ManyToOne (cascade = CascadeType.REFRESH)
-    @JoinColumn(name= "fk_predido")
+    @JoinColumn(name= "fk_pedido")
     private Pedido pedidos;
 }

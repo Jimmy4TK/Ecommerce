@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Repository
 public interface ProductoRepository extends BaseRepository<Producto, Long>{
     //BUSQUEDA POR NOMBRE DE PRODUCTO
@@ -51,4 +53,10 @@ public interface ProductoRepository extends BaseRepository<Producto, Long>{
             countQuery = "select count(*) from productos",
             nativeQuery = true)
     Page<Producto> orderDescPrice(Pageable pageable);
+
+    @Query(
+            value = "SELECT * FROM productos WHERE EXISTS (SELECT * FROM pedidoproductos WHERE pedidoproductos.fk_producto=productos.id AND pedidoproductos.id IN :listaid)" ,
+            countQuery = "select count(*) from productos",
+            nativeQuery = true)
+    Page<Producto> findByPedidoProducto(ArrayList<Long> listaid, Pageable pageable);
 }
