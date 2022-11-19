@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements PedidoService{
         @Autowired
@@ -31,5 +34,11 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     public Pedido activePedido(long fk_cliente) throws Exception{
         Pedido pedido = pedidoRepository.activePedido(fk_cliente);
         return pedido;
+    }
+
+    @Override
+    public List<Pedido> pedidosFacturados() throws Exception {
+        List<Pedido> pedidos = pedidoRepository.pedidosConFactura();
+        return pedidos;
     }
 }

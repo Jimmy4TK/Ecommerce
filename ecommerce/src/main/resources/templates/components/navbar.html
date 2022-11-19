@@ -11,7 +11,7 @@
             <li class="nav-item dropdown">
                     <a class="text-light nav-link dropdown-toggle" sec:authorize="hasAnyRole('ADMIN', 'CLIENTE')" th:href="@{/perfil}" style="margin-right: 10px" data-bs-toggle="dropdown"><i class="bi bi-person" style="font-size: 2.75rem;"></i><span class="sr-only"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Ir a perfil</a></li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/usuarios/perfil}">Ir a perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
                     </ul>
