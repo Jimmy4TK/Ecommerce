@@ -16,8 +16,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Audited
 public class PedidoProducto extends Base{
-    @Column(name="cant_producto")
-    private int cant_producto;
+    private String nombre;
+    private double cantidad;
+    private double precio;
+    private double total;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name= "fk_producto")
@@ -26,4 +28,5 @@ public class PedidoProducto extends Base{
     @ManyToOne (cascade = CascadeType.REFRESH)
     @JoinColumn(name= "fk_pedido")
     private Pedido pedidos;
+
 }

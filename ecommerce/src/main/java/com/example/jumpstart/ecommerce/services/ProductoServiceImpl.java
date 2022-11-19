@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService{
@@ -68,6 +69,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         }
     }
 
+
     @Override
     public Page<Producto> findByPedidoProducto(ArrayList<Long> listaid, Pageable pageable) throws Exception {
         try {
@@ -76,5 +78,12 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         }   catch (Exception e){
             throw new Exception(e.getMessage());
         }
+    }
+
+
+
+    @Override
+    public Optional<Producto> get(Long id) {
+        return productoRepository.findById(id);
     }
 }

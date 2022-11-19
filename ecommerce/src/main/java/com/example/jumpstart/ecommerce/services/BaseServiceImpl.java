@@ -1,6 +1,7 @@
 package com.example.jumpstart.ecommerce.services;
 
 import com.example.jumpstart.ecommerce.entities.Base;
+import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.repositories.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -74,4 +75,5 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             throw new Exception(e.getMessage());
         }
     }
+
 }

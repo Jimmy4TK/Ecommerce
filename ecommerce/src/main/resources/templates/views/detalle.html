@@ -16,7 +16,11 @@
             </div>
             <div class="col-8">
                 <div class="card">
-                    <div class="card-body">
+                    <form th:action="@{/cart}" method="POST">
+
+                        <input type="hidden" th:value="${id}" name="id">
+                        <ul class="list-group">
+                        <div class="card-body">
                         <h5 class="card-title"th:text="*{titulo}">Card title</h5>
                         <p class="card-text">Precio : <span th:text="*{precio}">1</span></p>
                         <p> Stock: <span th:text="*{stock}"></span>
@@ -24,18 +28,20 @@
                         <p class="card-text" th:unless="*{stock}">
                             <span class="text-danger">No hay stock</span>
                         </p>
-                    </div>
-                    <hr>
-                    <div class="card-body">
-                        <p class="card-text" th:text="*{descripcion}"></p>
-                        <label>Cantidad:</label>
-                        <input type="number" class="form-control" id="stock">
-                    </div>
-                    <div class="card-footer">
-                        <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
-                        Agregar al Carrito
-                    </a>
-                    </div>
+                        </div>
+                        <hr>
+                        <ul class="list-group">
+                        <li class="list-group-item"><h6>
+                            Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off" min="1" max="5" value="1">
+                        </h6>
+                        </li>
+                        </ul>
+                        </ul>
+                        <button type="submit" class="btn btn-dark">
+                            Añadir al
+                            carrito
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="col-12 mt-5">

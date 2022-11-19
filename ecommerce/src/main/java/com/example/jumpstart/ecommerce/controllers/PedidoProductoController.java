@@ -29,7 +29,7 @@ public class PedidoProductoController extends BaseControllerImpl<PedidoProducto,
     @Autowired
     private PedidoProductoService svcPedidoProducto;
 
-    @GetMapping("usuarios/{id}/agregar_producto")
+    /*@GetMapping("usuarios/{id}/agregar_producto")
     public String agregarproducto(Model model,@PathVariable("id")long id, long productoid, int cant_producto){
         try {
             Producto producto = this.svcProducto.findById(productoid);
@@ -41,5 +41,5 @@ public class PedidoProductoController extends BaseControllerImpl<PedidoProducto,
             model.addAttribute("error", e.getMessage());
             return "error";
         }
-    }
+    }*/
 }
