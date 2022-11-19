@@ -132,7 +132,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @PostMapping("/{id}/formulario")
+    @PostMapping("/formulario/{id}")
     public String guardarProducto(
             @RequestParam("archivo") MultipartFile archivo,
             @Valid @ModelAttribute("producto") Producto producto,

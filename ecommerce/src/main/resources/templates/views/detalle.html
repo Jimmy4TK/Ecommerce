@@ -19,8 +19,7 @@
                     <div class="card-body">
                         <h5 class="card-title"th:text="*{titulo}">Card title</h5>
                         <p class="card-text">Precio : <span th:text="*{precio}">1</span></p>
-                        <p class="card-text" th:if="*{stock}">
-                            Cantidad: <span th:text="*{stock}"></span>
+                        <p> Stock: <span th:text="*{stock}"></span>
                         </p>
                         <p class="card-text" th:unless="*{stock}">
                             <span class="text-danger">No hay stock</span>
@@ -29,6 +28,13 @@
                     <hr>
                     <div class="card-body">
                         <p class="card-text" th:text="*{descripcion}"></p>
+                        <label>Cantidad:</label>
+                        <input type="number" class="form-control" id="stock">
+                    </div>
+                    <div class="card-footer">
+                        <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
+                        Agregar al Carrito
+                    </a>
                     </div>
                 </div>
             </div>

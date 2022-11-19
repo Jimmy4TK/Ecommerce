@@ -6,10 +6,36 @@
         <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block">
             Ver Detalle
         </a>
-        <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
+        <!-- <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
             Agregar al Carrito
-        </a>
+        </a> -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar al Carrito
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" th:text="${producto.titulo}">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>
+                        <label>Cantidad:</label>
+                        <input type="number" class="form-control" id="stock">
+                    </div>
+                    <div class="modal-footer">
+                        <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
+                            Agregar al Carrito
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 <div th:fragment="carrito_card" class="card my-2">
     <div class="card mb-3" style="max-width: 540px;">
@@ -30,7 +56,8 @@
                 <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block">
                     Ver Detalle
                 </a>
-                <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block">
+
+                <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block ">
                     Agregar al Carrito
                 </a>
             </div>
