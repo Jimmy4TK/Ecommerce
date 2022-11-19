@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface PedidoRepository extends BaseRepository<Pedido, Long>{
     @Query(value="SELECT * FROM pedidos WHERE pedidos.fk_cliente LIKE %:fkCliente% and pedido.pagado = '0'",
@@ -18,4 +20,7 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long>{
             countQuery = "SELECT count(*) FROM pedidos",
             nativeQuery = true)
     Pedido activePedido(@Param("fk_usuario") long fk_usuario);
+
+    @Query("SELECT p FROM Pedido p WHERE p.factura IS NOT NULL")
+    public List<Pedido> pedidosConFactura();
 }
