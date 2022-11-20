@@ -1,9 +1,7 @@
 package com.example.jumpstart.ecommerce.controllers;
 
 import com.example.jumpstart.ecommerce.entities.*;
-import com.example.jumpstart.ecommerce.services.CategoriaService;
-import com.example.jumpstart.ecommerce.services.ProductoService;
-import com.example.jumpstart.ecommerce.services.UsuarioService;
+import com.example.jumpstart.ecommerce.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +18,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
 
     private final Logger log = LoggerFactory.getLogger(MainController.class);
     @Autowired
+    private FacturaService svcFactura;
+    @Autowired
     private ProductoService svcProducto;
     @Autowired
     private CategoriaService svcCategoria;
+    @Autowired
+    private PedidoProductoService svcPedidoProducto;
+    @Autowired
+    private PedidoService svcPedido;
     @Autowired
     private UsuarioService usuarioService;
     @GetMapping(value = "/")
@@ -158,5 +164,38 @@ public class MainController {
         model.addAttribute("usuario", usuario);
 
         return "usuario/resumenorden";
+    }
+
+    @GetMapping("/comprar")
+    public String finalizarCompra(HttpSession http ) throws Exception {
+        Factura factura = new Factura();
+        Date fechaCreacion = new Date();
+        Usuario usuario = (Usuario) http.getAttribute("usuariosession");
+        factura.setFecha(fechaCreacion);
+        factura.setTotal(pedido.getTotal());
+        factura.setUsuario(usuario);
+        pedido.setFechaFin(fechaCreacion);
+        pedido.setFactura(factura);
+        svcPedido.save(pedido);
+
+        //guardar detalles
+        for (PedidoProducto dt:pedidoProductos) {
+            dt.setPedidos(pedido);
+            svcPedidoProducto.save(dt);
+        }
+
+        ///limpiar lista y orden
+        pedido = new Pedido();
+        pedidoProductos.clear();
+
+        return "redirect:/usuarios/compras";
+    }
+
+    @PostMapping("/search")
+    public String searchProduct(@RequestParam String titulo, Model model, Pageable pageable) throws Exception {
+        log.info("Nombre del producto: {}", titulo);
+        List<Producto> productos= svcProducto.findAll(pageable).stream().filter( p -> p.getTitulo().contains(titulo)).collect(Collectors.toList());
+        model.addAttribute("productos", productos);
+        return "formulario/inicio";
     }
 }

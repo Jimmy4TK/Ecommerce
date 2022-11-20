@@ -31,7 +31,7 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
         }
     }
 
-    @GetMapping("/perfil")
+    @GetMapping("/compras")
     public String perfil(HttpSession http, ModelMap modelo){
         Usuario logueado = (Usuario) http.getAttribute("usuariosession");
         try{
@@ -40,7 +40,7 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
         }catch (Exception e){
             modelo.put("error", e.getMessage());
         }finally {
-            return "facturas";
+            return "views/facturas";
         }
 
     }

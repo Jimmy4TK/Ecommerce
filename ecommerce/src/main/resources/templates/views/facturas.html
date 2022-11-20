@@ -16,7 +16,7 @@
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
-              <h6 class="mb-0">Tipo: Factura <span th:text="${pedido.factura.tipo}"></span></h6>
+              <h6 class="mb-0">Tipo: Factura <span th:text="${pedido.factura.usuario.nombre}"></span></h6>
               <p class="mb-0 opacity-75">Monto total: <span th:text="${pedido.factura.precio}"></span></p>
               <p class="mb-0 opacity-75">Numero de pedido: <span th:text="${pedido.id}"></span></p>
             </div>
