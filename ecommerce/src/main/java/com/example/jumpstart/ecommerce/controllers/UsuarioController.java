@@ -1,13 +1,17 @@
 package com.example.jumpstart.ecommerce.controllers;
 
+import com.example.jumpstart.ecommerce.entities.Categoria;
+import com.example.jumpstart.ecommerce.entities.Producto;
 import com.example.jumpstart.ecommerce.entities.Usuario;
 import com.example.jumpstart.ecommerce.services.PedidoService;
 import com.example.jumpstart.ecommerce.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +47,17 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
             return "views/facturas";
         }
 
+    }
+
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo, HttpSession http) {
+        Usuario logueado = (Usuario) http.getAttribute("usuariosession");
+        try{
+            modelo.put("usuario", logueado);
+        }catch (Exception e){
+            modelo.put("error", e.getMessage());
+        }finally {
+            return "views/perfil";
+        }
     }
 }
