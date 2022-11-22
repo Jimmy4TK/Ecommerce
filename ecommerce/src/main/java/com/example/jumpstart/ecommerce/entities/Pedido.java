@@ -31,9 +31,9 @@ public class Pedido extends Base{
     @Column(name="pagado")
     private Boolean pagado;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_usuario")
-    private Usuario usuario;
+    //@ManyToOne(cascade = CascadeType.REFRESH)
+    //@JoinColumn(name = "fk_usuario")
+    //private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "fk_domicilio")

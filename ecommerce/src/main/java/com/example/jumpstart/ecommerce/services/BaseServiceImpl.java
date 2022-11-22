@@ -37,7 +37,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     }
 
     @Override
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public E save(E entity) throws Exception {
         try{
             entity = baseRepository.save(entity);

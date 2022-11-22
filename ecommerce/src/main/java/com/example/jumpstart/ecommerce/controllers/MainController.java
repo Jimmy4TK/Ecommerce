@@ -167,13 +167,15 @@ public class MainController {
     }
 
     @GetMapping("/comprar")
-    public String finalizarCompra(HttpSession http ) throws Exception {
+    public String finalizarCompra(HttpSession http, ModelMap modelo, Pageable pageable) throws Exception {
         Factura factura = new Factura();
         Date fechaCreacion = new Date();
         Usuario usuario = (Usuario) http.getAttribute("usuariosession");
+        Usuario usuario1 = usuarioService.findById(usuario.getId());
         factura.setFecha(fechaCreacion);
         factura.setTotal(pedido.getTotal());
-        factura.setUsuario(usuario);
+        factura.setUsuario(usuario1);
+        svcFactura.save(factura);
         pedido.setFechaFin(fechaCreacion);
         pedido.setFactura(factura);
         svcPedido.save(pedido);
@@ -188,6 +190,9 @@ public class MainController {
         pedido = new Pedido();
         pedidoProductos.clear();
 
+        List<Pedido> pedidos = svcPedido.pedidosFacturados();
+        modelo.addAttribute("pedidos", pedidos);
+        modelo.addAttribute("usuario", usuario1);
         return "redirect:/usuarios/compras";
     }
 
