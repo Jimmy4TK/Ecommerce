@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -115,7 +116,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/{id}/formulario")
     public String formularioProducto(Model model, @PathVariable("id")long id){
         try {
@@ -131,7 +132,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/formulario/{id}")
     public String guardarProducto(
             @RequestParam("archivo") MultipartFile archivo,
@@ -188,7 +189,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
             return "error";
         }
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/{id}/eliminar")
     public String eliminarProducto(Model model,@PathVariable("id")long id){
         try {
@@ -200,7 +201,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/{id}/eliminar")
     public String desactivarProducto(Model model,@PathVariable("id")long id){
         try {
