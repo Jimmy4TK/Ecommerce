@@ -149,8 +149,8 @@ public class MainController {
         sumaTotal = pedidoProductos.stream().mapToDouble(dt -> dt.getTotal()).sum();
 
         pedido.setTotal((float) sumaTotal);
-        model.addAttribute("cart", pedidoProductos);
-        model.addAttribute("orden", pedido);
+        model.addAttribute("pedidoProductos", pedidoProductos);
+        model.addAttribute("pedido", pedido);
 
         return "views/carrito";
     }

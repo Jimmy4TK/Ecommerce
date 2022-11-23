@@ -3,6 +3,7 @@ package com.example.jumpstart.ecommerce.controllers;
 import com.example.jumpstart.ecommerce.entities.Pedido;
 import com.example.jumpstart.ecommerce.entities.PedidoProducto;
 import com.example.jumpstart.ecommerce.entities.Producto;
+import com.example.jumpstart.ecommerce.entities.Usuario;
 import com.example.jumpstart.ecommerce.services.PedidoProductoService;
 import com.example.jumpstart.ecommerce.services.PedidoService;
 import com.example.jumpstart.ecommerce.services.PedidoServiceImpl;
@@ -14,8 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +26,9 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(path = "pedidos")
 public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceImpl>{
+
+    @Autowired
+    PedidoService pedidoService;
 
     @Autowired
     private PedidoService svcPedido;
@@ -62,5 +68,18 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             model.addAttribute("error", e.getMessage());
             return "error";
         }
+    }
+    @GetMapping("/facturas")
+    public String perfil(HttpSession http, ModelMap modelo){
+        Usuario logueado = (Usuario) http.getAttribute("usuariosession");
+        try{
+            modelo.put("usuario", logueado);
+            modelo.addAttribute("pedidos", pedidoService.pedidosFacturados());
+        }catch (Exception e){
+            modelo.put("error", e.getMessage());
+        }finally {
+            return "views/facturas";
+        }
+
     }
 }

@@ -3,82 +3,11 @@
     <div class="card-body">
         <h5 class="card-title"th:text="${producto.titulo}">Card title</h5>
         <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>
-        <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block">
+        <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-secondary btn-block">
             Ver Detalle
         </a>
-        <!-- <a th:href="@{/pedidosproductos/usuarios/1/agregar_producto(productoid=${producto.id}, cant_producto=1)}" class="btn btn-primary btn-block">
-            Agregar al Carrito
-        </a> -->
-        <div sec:authorize="hasRole('CLIENTE')">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Agregar al Carrito
-            </button>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" th:object="${producto}">
-                    <form th:action="@{/cart}" method="POST">
-                        <input type="hidden" th:value="*{id}" name="id">
-                        <ul class="list-group">
-                            <div class="card-body">
-                                <h5 class="card-title"th:text="*{titulo}">Card title</h5>
-                                <p class="card-text">Precio : <span th:text="*{precio}">1</span></p>
-                                <p> Stock: <span th:text="*{stock}"></span>
-                                </p>
-                                <p class="card-text" th:unless="*{stock}">
-                                    <span class="text-danger">No hay stock</span>
-                                </p>
-                            </div>
-                            <hr>
-                            <div sec:authorize="hasRole('CLIENTE')">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><h6>
-                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off" min="1" max="5" value="1">
-                                    </h6>
-                                    </li>
-                                </ul>
-                            </div>
-                        </ul>
-                        <div sec:authorize="hasRole('CLIENTE')">
-                            <button type="submit" class="btn btn-dark">
-                                Añadir al
-                                carrito
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
-</div>
-<div th:fragment="carrito_card" class="card my-2">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img th:src="@{'/imagenes/'} + ${producto.imagen}" class="card-img-top" alt="producto imagen">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"th:text="${producto.titulo}">Card title</h5>
-                    <p class="card-text">Precio : <span th:text="${producto.precio}">1</span></p>
-                </div>
-            </div>
-<!--            <div class="col-md-4">-->
-<!--                <p class="card-text">Cantidad : <span th:each="pedidoproducto : ${pedidoproductos}" th:if="${pedidoproducto.fk_producto == producto.id}" th:text="${pedidoproducto.cant_producto}">1</span></p>-->
-<!--            </div>-->
-            <div class="col-md-4">
-                <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block">
-                    Ver Detalle
-                </a>
-
-                <a th:href="@{/productos/{id}/detalle(id=${producto.id})}" class="btn btn-primary btn-block ">
-                    Agregar al Carrito
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 <div th:fragment="categoria_li">
     <li class="nav-item">
